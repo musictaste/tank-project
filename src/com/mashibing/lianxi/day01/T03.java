@@ -11,5 +11,6 @@ package com.mashibing.lianxi.day01;
 public class T03 {
     public static void main(String[] args) {
         TankFrame02 tf = new TankFrame02();
+
     }
 }

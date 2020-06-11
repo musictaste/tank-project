@@ -20,6 +20,7 @@ public class TankFrame extends Frame {
     Tank myTank=new Tank(200,400, Direction.UP,Group.GOOD,this);
     List<Bullet> bullets = new ArrayList<>();
     List<Tank> enemies = new ArrayList<>();
+    Explode explode = new Explode(100,100,this);
 
     static final int GAME_WIDTH=800,GAME_HEIGHT=600;
 
@@ -86,6 +87,8 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWith(enemies.get(j));
             }
         }
+
+        explode.paint(g);
 
         //第二种迭代，并删除子弹的方式
        /* for(Iterator<Bullet> it = bullets.iterator();it.hasNext()){

@@ -17,8 +17,10 @@ import java.util.List;
  * @Version V1.0
  **/
 public class TankFrame extends Frame {
-    Tank myTank=new Tank(200,200, Direction.RIGHT,this);
+    Tank myTank=new Tank(200,400, Direction.UP,this);
     List<Bullet> bullets = new ArrayList<>();
+    List<Tank> enemies = new ArrayList<>();
+
     static final int GAME_WIDTH=800,GAME_HEIGHT=600;
 
     public TankFrame(){
@@ -71,13 +73,11 @@ public class TankFrame extends Frame {
         g.setColor(c);
 
         myTank.paint(g);
-        //当别的地方在操作list容器时，不能用这种方式进行迭代
-       /* for(Bullet b: bullets){
-            b.paint(g);
-        }*/
-
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
+        }
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).paint(g);
         }
 
         //第二种迭代，并删除子弹的方式

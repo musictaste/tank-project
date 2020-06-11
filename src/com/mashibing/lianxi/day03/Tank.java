@@ -13,6 +13,8 @@ import java.awt.*;
 public class Tank {
     private int x=200,y=200;
     private Direction direction = Direction.LEFT;
+    public static int width = ResourceMgr.tankD.getWidth();
+    public static int height = ResourceMgr.tankD.getHeight();
     private static final int SPEED = 5;
     private TankFrame tf = null;
 
@@ -81,7 +83,11 @@ public class Tank {
     }
 
     public void fire() {
+        //让子弹从坦克的中心位置打出，公式=当前x + 坦克图片的一半  - 子弹图片的一半
+
+        int bulletX = this.x + Tank.width/2 - Bullet.width/2;
+        int bulletY = this.y + Tank.height/2 - Bullet.height/2;
         //为了以后的灵活，比如一次发射5个子弹，发射核弹，所以不建议return new Bullet()
-        tf.bullets.add(new Bullet(this.x,this.y,this.direction,this.tf));
+        tf.bullets.add(new Bullet(bulletX,bulletY,this.direction,this.tf));
     }
 }

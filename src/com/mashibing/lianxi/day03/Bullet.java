@@ -20,7 +20,8 @@ public class Bullet {
     private static final int SPEED = 10;
 
     //子弹的大小：长、宽
-    private int width=30,height=30;
+    public static int width=ResourceMgr.bulletD.getWidth();
+    public static int height=ResourceMgr.bulletD.getHeight();
 
     //游戏界面
     private TankFrame tf =null;

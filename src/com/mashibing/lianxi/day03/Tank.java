@@ -17,8 +17,25 @@ public class Tank {
     public static int height = ResourceMgr.tankD.getHeight();
     private static final int SPEED = 5;
     private TankFrame tf = null;
+    private boolean living = true;
 
     private boolean moving =false;//处理静止状态
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
     public boolean isMoving() {
         return moving;
@@ -44,6 +61,8 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if(!living) tf.enemies.remove(this);
+
         switch (direction){
             case LEFT:
                 g.drawImage(ResourceMgr.tankL,x,y,null);
@@ -89,5 +108,13 @@ public class Tank {
         int bulletY = this.y + Tank.height/2 - Bullet.height/2;
         //为了以后的灵活，比如一次发射5个子弹，发射核弹，所以不建议return new Bullet()
         tf.bullets.add(new Bullet(bulletX,bulletY,this.direction,this.tf));
+    }
+
+    /**
+    * @MethodName: die
+    * @Description: 坦克死亡
+    **/
+    public void die() {
+        this.living=false;
     }
 }

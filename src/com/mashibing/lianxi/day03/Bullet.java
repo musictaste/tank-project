@@ -27,7 +27,7 @@ public class Bullet {
     private TankFrame tf =null;
 
     //子弹是否存活
-    public boolean live = true;
+    public boolean living = true;
 
     public Bullet(int x, int y, Direction direction, TankFrame tf) {
         this.x = x;
@@ -38,7 +38,7 @@ public class Bullet {
 
     public void paint(Graphics g){
         //如果子弹不再存活，从容器中移除
-        if(!live) tf.bullets.remove(this);
+        if(!living) tf.bullets.remove(this);
 
         switch (direction){
             case LEFT:
@@ -77,8 +77,27 @@ public class Bullet {
         }
 
         //判断子弹是否还在屏幕边界内，如果不在则子弹不再存活
-        if(x<0 || y<0 || x>tf.GAME_WIDTH || y>tf.GAME_HEIGHT) live=false;
+        if(x<0 || y<0 || x>tf.GAME_WIDTH || y>tf.GAME_HEIGHT) living=false;
     }
 
+    /**
+    * @MethodName: collideWith
+    * @Description: 子弹和坦克碰撞
+    **/
+    public void collideWith(Tank tank) {
+        Rectangle bulletRect = new Rectangle(this.x,this.y,width,height);
+        Rectangle tankRect = new Rectangle(tank.getX(),tank.getY(),Tank.width,Tank.height);
+        if( bulletRect.intersects(tankRect) ){
+            this.die();
+            tank.die();
+        }
+    }
 
+    /**
+    * @MethodName: die
+    * @Description: 子弹死亡
+    **/
+    private void die() {
+        this.living=false;
+    }
 }

@@ -29,10 +29,13 @@ public class Bullet {
     //子弹是否存活
     public boolean living = true;
 
-    public Bullet(int x, int y, Direction direction, TankFrame tf) {
+    private Group group;
+
+    public Bullet(int x, int y, Direction direction, Group group,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.direction = direction;
+        this.group=group;
         this.tf=tf;
     }
 
@@ -85,6 +88,9 @@ public class Bullet {
     * @Description: 子弹和坦克碰撞
     **/
     public void collideWith(Tank tank) {
+        if(this.group==tank.getGroup()) return;
+
+        //TODO: 用一个rect来记录子弹的位置
         Rectangle bulletRect = new Rectangle(this.x,this.y,width,height);
         Rectangle tankRect = new Rectangle(tank.getX(),tank.getY(),Tank.width,Tank.height);
         if( bulletRect.intersects(tankRect) ){

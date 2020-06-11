@@ -2,6 +2,7 @@ package com.mashibing.lianxi.day03;
 
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * @ClassName Tank02
@@ -15,11 +16,20 @@ public class Tank {
     private Direction direction = Direction.LEFT;
     public static int width = ResourceMgr.tankD.getWidth();
     public static int height = ResourceMgr.tankD.getHeight();
-    private static final int SPEED = 5;
+    private static final int SPEED = 1;
     private TankFrame tf = null;
     private boolean living = true;
+    private Random random = new Random();
+    private Group group;
+    private boolean moving =true;//处理静止状态
 
-    private boolean moving =false;//处理静止状态
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
     public int getX() {
         return x;
@@ -53,10 +63,11 @@ public class Tank {
         this.direction = direction;
     }
 
-    public Tank(int x, int y, Direction direction, TankFrame tf) {
+    public Tank(int x, int y, Direction direction, Group group,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.direction = direction;
+        this.group=group;
         this.tf = tf;
     }
 
@@ -99,6 +110,8 @@ public class Tank {
             default:
                 break;
         }
+
+        if(random.nextInt(10)>8) this.fire();
     }
 
     public void fire() {
@@ -107,7 +120,7 @@ public class Tank {
         int bulletX = this.x + Tank.width/2 - Bullet.width/2;
         int bulletY = this.y + Tank.height/2 - Bullet.height/2;
         //为了以后的灵活，比如一次发射5个子弹，发射核弹，所以不建议return new Bullet()
-        tf.bullets.add(new Bullet(bulletX,bulletY,this.direction,this.tf));
+        tf.bullets.add(new Bullet(bulletX,bulletY,this.direction,this.group,this.tf));
     }
 
     /**

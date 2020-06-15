@@ -117,8 +117,6 @@ public class Tank {
         //敌方坦克随机移动
         if(this.group==Group.BAD && random.nextInt(100)>95)  this.randomDirection();
 
-
-
     }
 
     private void randomDirection() {

@@ -111,7 +111,18 @@ public class Tank {
                 break;
         }
 
-        if(random.nextInt(10)>8) this.fire();
+        //敌方坦克随机发射子弹
+        if(this.group==Group.BAD && random.nextInt(100)>95) this.fire();
+
+        //敌方坦克随机移动
+        if(this.group==Group.BAD && random.nextInt(100)>95)  this.randomDirection();
+
+
+
+    }
+
+    private void randomDirection() {
+        this.direction = Direction.values()[random.nextInt(4)];
     }
 
     public void fire() {

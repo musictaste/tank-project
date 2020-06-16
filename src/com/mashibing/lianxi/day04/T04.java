@@ -11,8 +11,9 @@ package com.mashibing.lianxi.day04;
 public class T04 {
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
-        for (int i = 0; i < 5; i++) {
-            tf.enemies.add(new Tank(200+i*50,200, Direction.DOWN, Group.BAD,tf));
+        int initTankCount = Integer.valueOf((String)PropertyMgr.get("initTankCount"));
+        for (int i = 0; i < initTankCount; i++) {
+            tf.enemies.add(new Tank(200+i*80,200, Direction.DOWN, Group.BAD,tf));
         }
 
         //背景音乐

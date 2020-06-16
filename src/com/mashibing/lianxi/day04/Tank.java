@@ -14,8 +14,8 @@ import java.util.Random;
 public class Tank {
     private int x=200,y=200;
     private Direction direction = Direction.LEFT;
-    public static int width = ResourceMgr.tankU.getWidth();
-    public static int height = ResourceMgr.tankU.getHeight();
+    public static int width = ResourceMgr.goodTankU.getWidth();
+    public static int height = ResourceMgr.goodTankU.getHeight();
     private static final int SPEED = 2;
     private TankFrame tf = null;
     private boolean living = true;
@@ -76,16 +76,16 @@ public class Tank {
 
         switch (direction){
             case LEFT:
-                g.drawImage(ResourceMgr.tankL,x,y,null);
+                g.drawImage(this.group==Group.GOOD ? ResourceMgr.goodTankL:ResourceMgr.badTankL,x,y,null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR,x,y,null);
+                g.drawImage(this.group==Group.GOOD ? ResourceMgr.goodTankR:ResourceMgr.badTankR,x,y,null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.tankU,x,y,null);
+                g.drawImage(this.group==Group.GOOD ? ResourceMgr.goodTankU:ResourceMgr.badTankU,x,y,null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD,x,y,null);
+                g.drawImage(this.group==Group.GOOD ? ResourceMgr.goodTankD:ResourceMgr.badTankD,x,y,null);
                 break;
         }
         move();

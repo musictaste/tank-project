@@ -23,6 +23,8 @@ public class Tank {
     private Group group;
     private boolean moving =true;//处理静止状态
 
+    public Rectangle rect = new Rectangle();
+
     public Group getGroup() {
         return group;
     }
@@ -69,6 +71,11 @@ public class Tank {
         this.direction = direction;
         this.group=group;
         this.tf = tf;
+
+        rect.x=this.x;
+        rect.y=this.y;
+        rect.width=width;
+        rect.height=height;
     }
 
     public void paint(Graphics g) {
@@ -111,6 +118,8 @@ public class Tank {
                 break;
         }
 
+
+
         //敌方坦克随机发射子弹
         if(this.group==Group.BAD && random.nextInt(100)>95) this.fire();
 
@@ -119,6 +128,10 @@ public class Tank {
 
         //边界检测
         boundCheck();
+
+        //边界检测以后，移动的时候，更新Rectangle的坐标，用于碰撞检测
+        rect.x=x;
+        rect.y=y;
     }
 
     //坦克移动的边界检测

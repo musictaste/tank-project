@@ -31,12 +31,19 @@ public class Bullet {
 
     private Group group;
 
+    public Rectangle rect = new Rectangle();
+
     public Bullet(int x, int y, Direction direction, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.direction = direction;
         this.group=group;
         this.tf=tf;
+
+        rect.x=this.x;
+        rect.y=this.y;
+        rect.width=width;
+        rect.height=height;
     }
 
     public void paint(Graphics g){
@@ -79,6 +86,10 @@ public class Bullet {
                 break;
         }
 
+        //移动时，更新rect的坐标
+        rect.x=x;
+        rect.y=y;
+
         //判断子弹是否还在屏幕边界内，如果不在则子弹不再存活
         if(x<0 || y<0 || x>tf.GAME_WIDTH || y>tf.GAME_HEIGHT) living=false;
     }
@@ -90,10 +101,8 @@ public class Bullet {
     public void collideWith(Tank tank) {
         if(this.group==tank.getGroup()) return;
 
-        //TODO: 用一个rect来记录子弹的位置
-        Rectangle bulletRect = new Rectangle(this.x,this.y,width,height);
-        Rectangle tankRect = new Rectangle(tank.getX(),tank.getY(), Tank.width, Tank.height);
-        if( bulletRect.intersects(tankRect) ){
+        //用一个rect来记录子弹的位置，避免不停的创建Rectangle对象
+        if( rect.intersects(tank.rect) ){
             this.die();
             tank.die();
 

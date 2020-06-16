@@ -117,12 +117,25 @@ public class Tank {
         //敌方坦克随机移动
         if(this.group==Group.BAD && random.nextInt(100)>95)  this.randomDirection();
 
+        //边界检测
+        boundCheck();
     }
 
+    //坦克移动的边界检测
+    //减2的原因是坦克别太靠边
+    private void boundCheck() {
+        if(this.x<2) x=2;
+        if(this.x>TankFrame.GAME_WIDTH-Tank.width-2) x=TankFrame.GAME_WIDTH-Tank.width-2;
+        if(this.y<28) y=28;
+        if(this.y>TankFrame.GAME_HEIGHT-Tank.height-2) y = TankFrame.GAME_HEIGHT-Tank.height-2;
+    }
+
+    //坦克的随机方向
     private void randomDirection() {
         this.direction = Direction.values()[random.nextInt(4)];
     }
 
+    //坦克发射子弹
     public void fire() {
         //让子弹从坦克的中心位置打出，公式=当前x + 坦克图片的一半  - 子弹图片的一半
 

@@ -1,4 +1,4 @@
-package com.mashibing.lianxi.day05;
+package com.mashibing.lianxi.day06Strategy;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -15,7 +15,7 @@ public class PropertyMgr {
 
     static {
         try {
-            pros.load(PropertyMgr.class.getClassLoader().getResourceAsStream("com/mashibing/lianxi/day05/config"));
+            pros.load(PropertyMgr.class.getClassLoader().getResourceAsStream("com/mashibing/lianxi/day06Strategy/config"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -29,7 +29,13 @@ public class PropertyMgr {
         return pros.get(key);
     }
 
+    public static int getInt(String key){
+        if (pros==null) return 0;
+        return Integer.valueOf((String)pros.get(key));
+    }
+
     public static void main(String[] args) {
         System.out.println(PropertyMgr.get("initTankCount"));
+        System.out.println(PropertyMgr.getInt("gameWidth"));
     }
 }

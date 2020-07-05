@@ -1,0 +1,10 @@
+initTankCount=6
+tankSpeed=2
+bulletSpeed=6
+gameWidth=1080
+gameHeight=960
+#fireStrategy
+goodFireStrategy=com.mashibing.lianxi.day06Strategy.strategy.FourDirectionFireStrategy
+badFireStrategy=com.mashibing.lianxi.day06Strategy.strategy.DefaultFireStrategy
+#colliders
+colliders=com.mashibing.lianxi.day09Decorator.collider.BulletTankCollider,com.mashibing.lianxi.day09Decorator.collider.TankTankCollider,com.mashibing.lianxi.day09Decorator.collider.BulletWallCollider,com.mashibing.lianxi.day09Decorator.collider.TankWallCollider

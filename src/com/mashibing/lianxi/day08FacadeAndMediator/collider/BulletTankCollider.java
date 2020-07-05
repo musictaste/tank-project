@@ -22,7 +22,7 @@ public class BulletTankCollider implements Collider {
             Bullet bullet = (Bullet) o1;
             Tank tank = (Tank)o2;
 
-            if(bullet.group==tank.getGroup()) return false;
+            if(bullet.group==tank.getGroup()) return true;
             //用一个rect来记录子弹的位置，避免不停的创建Rectangle对象
             if( bullet.rect.intersects(tank.rect) ) {
                 bullet.die();
@@ -33,13 +33,11 @@ public class BulletTankCollider implements Collider {
                 int explodeY = tank.getY() + Tank.height / 2 - Bullet.height / 2;
 
                 gameModel.add(new Explode(explodeX, explodeY, gameModel));
-                return true;
+                return false;
             }
-            return false;
         }else if(o1 instanceof Tank && o2 instanceof Bullet){
             return collide(o2,o1,gameModel);
-        }else {
-            return false;
         }
+        return false;
     }
 }

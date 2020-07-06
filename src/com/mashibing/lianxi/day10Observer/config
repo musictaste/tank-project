@@ -1,0 +1,10 @@
+initTankCount=6
+tankSpeed=2
+bulletSpeed=6
+gameWidth=1080
+gameHeight=960
+#fireStrategy
+goodFireStrategy=com.mashibing.lianxi.day10Observer.strategy.FourDirectionFireStrategy
+badFireStrategy=com.mashibing.lianxi.day10Observer.strategy.DefaultFireStrategy
+#colliders
+colliders=com.mashibing.lianxi.day10Observer.collider.BulletTankCollider,com.mashibing.lianxi.day10Observer.collider.TankTankCollider,com.mashibing.lianxi.day10Observer.collider.BulletWallCollider,com.mashibing.lianxi.day10Observer.collider.TankWallCollider

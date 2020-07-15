@@ -29,6 +29,7 @@ public class Server {
 					@Override
 					protected void initChannel(SocketChannel ch) throws Exception {
 						ChannelPipeline pl = ch.pipeline();
+						//服务器端加编解码，方便调试（查看服务器端有没有收到客户端的消息，以及消息是否正确）
 						pl.addLast(new MsgEncoder());
 						pl.addLast(new MsgDecoder());
 						pl.addLast(new ServerChildHandler());
@@ -60,6 +61,7 @@ class ServerChildHandler extends ChannelInboundHandlerAdapter { //SimpleChannleI
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		//将客户端发送的消息显示出来
 		ServerFrame.INSTANCE.updateClientMsg(msg.toString());
 		Server.clients.writeAndFlush(msg);
 		

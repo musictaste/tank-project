@@ -70,6 +70,7 @@ public class TankJoinMsg extends Msg {
 	}
 	@Override
 	public byte[] toBytes() {
+		//这里没有使用Netty的ByteBuf，是因为如果使用了ByteBuf就绑定了Netty，如果那天不想用Netty了，方法就需要重写
 		ByteArrayOutputStream baos = null;
 		DataOutputStream dos = null; 
 		byte[] bytes = null;
@@ -80,11 +81,11 @@ public class TankJoinMsg extends Msg {
 			//dos.writeInt(TYPE.ordinal());
 			dos.writeInt(x);
 			dos.writeInt(y);
-			dos.writeInt(dir.ordinal());
-			dos.writeBoolean(moving);
+			dos.writeInt(dir.ordinal());//Enum是数组，ordinal指的是数组的下标
+			dos.writeBoolean(moving);//Boolean虽然是1位，但是网络传输是1个字节
 			dos.writeInt(group.ordinal());
-			dos.writeLong(id.getMostSignificantBits());
-			dos.writeLong(id.getLeastSignificantBits());
+			dos.writeLong(id.getMostSignificantBits());//因为UUID是128位，把高位的64位拿出来作为Long类型
+			dos.writeLong(id.getLeastSignificantBits());//把低位的64位作为Long类型
 			//dos.writeUTF(name);
 			dos.flush();
 			bytes = baos.toByteArray();

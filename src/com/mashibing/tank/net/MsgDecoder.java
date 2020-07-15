@@ -14,6 +14,7 @@ public class MsgDecoder extends ByteToMessageDecoder{
 
 	@Override
 	protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
+		//
 		if(in.readableBytes() < 8) return;
 		
 		in.markReaderIndex();

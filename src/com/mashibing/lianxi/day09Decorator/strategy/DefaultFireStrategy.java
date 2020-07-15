@@ -32,6 +32,8 @@ public class DefaultFireStrategy implements FireStrategy {
 //        new Bullet(bulletX,bulletY,t.getDirection(),t.getGroup());
         //TODO 遗留bug：new Bullet把自己又加了一遍
 //        GameModel.getInstance().add(new RectDecorator(new Bullet(bulletX,bulletY,t.getDirection(),t.getGroup())));
+
+        //装饰者模式经常跟责任链模式组合使用，这样就可以避免下面的代码
         GameModel.getInstance().add(
                 new RectDecorator(
                         new TailDecorator(

@@ -86,6 +86,7 @@ class ClientChannelInitializer extends ChannelInitializer<SocketChannel> {
 
 class ClientHandler extends SimpleChannelInboundHandler<Msg> {
 
+	//channelRead0一看方法名就是临时起的，Netty5的时候方法名改为messageReceive,但是呢Netty5被废掉了，等Netty6出来的时候再看
 	@Override
 	public void channelRead0(ChannelHandlerContext ctx, Msg msg) throws Exception {
 		System.out.println(msg);

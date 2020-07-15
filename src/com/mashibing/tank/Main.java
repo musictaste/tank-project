@@ -18,7 +18,8 @@ public class Main {
 		}*/
 		//music
 		new Thread(()->new Audio("audio/war1.wav").loop()).start();
-		
+
+		//用单独的线程进行重画，因为如果不用单独的线程，Client连接以后，重画就永远不会执行
 		new Thread(()-> {
 			while(true) {
 				try {
